@@ -1,8 +1,8 @@
 mongodb:
   server:   localhost
   database: uptime
-  user:     root 
-  password:
+  user:     uptimeUser 
+  password: password
   connectionString:       # alternative to setting server, database, user and password separately
 
 monitor:
