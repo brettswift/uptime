@@ -241,6 +241,16 @@ Check.methods.updateQos = function(callback) {
   });
 };
 
+Check.methods.updateVersion = function(newVersion, callback) {
+  var check = this;
+
+  if(check.version !== newVersion){
+    //TODO: create new event of version change
+    check.version = newVersion;
+    check.save(callback);
+  }
+};
+
 var statProvider = {
   'hour':  { model: 'Ping', beginMethod: 'resetHour', endMethod: 'completeHour' },
   'day':   { model: 'CheckHourlyStat', beginMethod: 'resetDay', endMethod: 'completeDay', duration: 60 * 60 * 1000 },

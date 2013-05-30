@@ -1,20 +1,33 @@
 var mongoose = require('mongoose');
-var Schema   = mongoose.Schema;
+var Schema = mongoose.Schema;
+
+//model dependencies
+var CheckEvent = require('../models/checkEvent');
 
 var Ping = new Schema({
-  timestamp    : { type: Date, default: Date.now },
-  isUp         : Boolean,  // false if ping returned a non-OK status code or timed out
-  isResponsive : Boolean,  // true if the ping time is less than the check max time 
-  time         : Number,
-  check        : { type: Schema.ObjectId, ref: 'Check' },
-  tags         : [String],
-  monitorName  : String,
+  timestamp: {
+    type: Date,
+    default: Date.now
+  },
+  isUp: Boolean, // false if ping returned a non-OK status code or timed out
+  isResponsive: Boolean, // true if the ping time is less than the check max time 
+  time: Number,
+  check: {
+    type: Schema.ObjectId,
+    ref: 'Check'
+  },
+  tags: [String],
+  monitorName: String,
   // for pings in error, more details need to be persisted
-  downtime     : Number,   // time since last ping if the ping is down
-  error        : String
+  downtime: Number, // time since last ping if the ping is down
+  error: String
 });
-Ping.index({ timestamp: -1 });
-Ping.index({ check: 1 });
+Ping.index({
+  timestamp: -1
+});
+Ping.index({
+  check: 1
+});
 Ping.plugin(require('mongoose-lifecycle'));
 
 Ping.methods.findCheck = function(callback) {
@@ -42,6 +55,19 @@ Ping.statics.createForCheck = function(status, timestamp, time, check, monitorNa
   ping.save(function(err1) {
     if (err1) return callback(err1);
     check.setLastTest(status, timestamp, error);
+    if (check.version !== check.newVersion) {
+      check.version = check.newVersion;
+      //TODO: add version tag here to find version history easier.
+      var newEvent = new CheckEvent({
+        check: check,
+        tags: check.tags,
+        message: "version changed to: " + check.version,
+        details: "version change"
+      });
+
+      newEvent.save();
+    }
+
     check.save(function(err2) {
       if (err2) return callback(err2);
       callback(null, ping);
@@ -50,8 +76,12 @@ Ping.statics.createForCheck = function(status, timestamp, time, check, monitorNa
 };
 
 Ping.statics.cleanup = function(maxAge, callback) {
-  var oldestDateToKeep = new Date(Date.now() - (maxAge ||  3 * 31 * 24 * 60 * 60 * 1000));
-  this.find({ timestamp: { $lt: new Date(oldestDateToKeep) } }).remove(callback);
+  var oldestDateToKeep = new Date(Date.now() - (maxAge || 3 * 31 * 24 * 60 * 60 * 1000));
+  this.find({
+    timestamp: {
+      $lt: new Date(oldestDateToKeep)
+    }
+  }).remove(callback);
 };
 
 module.exports = mongoose.model('Ping', Ping);

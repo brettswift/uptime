@@ -15,7 +15,9 @@
     "socket.io": "0.9.14",
     "semver":    "1.1.0",
     "moment":    "1.7.2",
-    "nodemailer": "0.3.35"
+    "nodemailer": "0.3.35",
+    "xml2js": "0.1.x",
+    "JSONPath": "0.9.x"
   },
   "devDependencies": {
     "mocha": "1.7.x",
