@@ -55,7 +55,7 @@ Ping.statics.createForCheck = function(status, timestamp, time, check, monitorNa
   ping.save(function(err1) {
     if (err1) return callback(err1);
     check.setLastTest(status, timestamp, error);
-    if (check.version !== check.newVersion) {
+    if ((check.newVersion !== 'undefined') && check.version !== check.newVersion) {
       check.version = check.newVersion;
       //TODO: add version tag here to find version history easier.
       var newEvent = new CheckEvent({
