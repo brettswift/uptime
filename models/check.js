@@ -30,7 +30,8 @@ var Check = new Schema({
   uptime      : { type: Number, default: 0 },
   downtime    : { type: Number, default: 0 },
   qos         : {},
-  version     : { type: String, default: "unkown"}
+  version     : { type: String, default: "unkown"},
+  jsonPath    : {type: String, default: ""}
 });
 Check.plugin(require('mongoose-lifecycle'));
 
@@ -352,6 +353,8 @@ Check.statics.guessType = function(url) {
   } else if (url.search(/^icmp:\/\//) != -1) {
     type = 'icmp';
   }
+
+
 
   return type
 };

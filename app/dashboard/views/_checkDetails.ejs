@@ -16,6 +16,16 @@
           <span class="help-inline"><a href="<%= check.url %>" target="_blank"><img src="<%= route %>/images/external-link-ltr-icon.png"></a></span>
         </div>
       </div>
+
+      <div class="control-group">
+        <label class="control-label">JSON Path (optional)</label>
+        <div class="controls">
+          <div class="input-append">
+            <input type="text" name="check[jsonPath]" value="<%= check.jsonPath || '' %>" class="span4" placeholder="$.status.build"/>
+          </div>
+        </div>
+      </div>
+
       <div class="control-group">
         <label class="control-label">Polling interval</label>
         <div class="controls">
