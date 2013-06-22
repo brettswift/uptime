@@ -15,3 +15,26 @@ It's a simple server that responds to the fixture pings with a quality of servic
     http://localhost:8888/90
 
 will return HTTP status 200 90% of the time, and HTTP status 500 the rest of the time.
+
+
+
+**Testing the ***jsonpath*** poller**
+
+Just like the regular dummyTarget, if you want to test the jsonpath poller, you can do that by running 
+	
+	> node fixtures/dummyTargetJsonPath.js
+
+This server takes two arguments.  One for % successful response as with the dummyTarget.  A second for % chance of a version upgrade. 
+	 http://localhost:8888/99/1
+
+This will return 99 % successful http get,  and 1% of the time the version will upgrade. 
+
+The server uses the same jsonpath used in the hint text of the UI. 
+
+```
+	 <service>
+	 	<status>
+	 		<build>1.0.1.1001</build>
+	 	</status>
+	 </service>
+```

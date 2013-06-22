@@ -341,10 +341,13 @@ Check.statics.convertTags = function(tags) {
   return tags;
 };
 
-Check.statics.guessType = function(url) {
+Check.statics.guessType = function(check) {
   var type;
+  var url = check.url;
 
-  if (url.search(/^http:\/\//) != -1) {
+  if(check.jsonPath){
+    type = 'jsonpath';
+  } else if (url.search(/^http:\/\//) != -1) {
     type = 'http';
   } else if (url.search(/^https:\/\//) != -1) {
     type = 'https';
@@ -353,6 +356,7 @@ Check.statics.guessType = function(url) {
   } else if (url.search(/^icmp:\/\//) != -1) {
     type = 'icmp';
   }
+
 
 
 
