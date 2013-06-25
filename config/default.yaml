@@ -1,6 +1,6 @@
 mongodb:
   server:   localhost
-  database: uptime
+  database: brettUptime
   user:     uptimeUser 
   password: password
   connectionString:       # alternative to setting server, database, user and password separately
@@ -39,4 +39,4 @@ email:
     to:              # The message recipient, e.g. 'bar@blurdybloop.com, baz@blurdybloop.com'
   dashboardUrl: 'http://localhost:8082'
 
-verbose: true # only used in dev
+verbose: false # only used in dev
