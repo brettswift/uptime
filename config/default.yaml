@@ -1,6 +1,6 @@
 mongodb:
   server:   localhost
-  database: brettUptime
+  database: uptimeStatusUpdate 
   user:     uptimeUser 
   password: password
   connectionString:       # alternative to setting server, database, user and password separately
