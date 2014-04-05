@@ -61,11 +61,21 @@ Ping.statics.createForCheck = function(status, timestamp, time, check, monitorNa
       var newEvent = new CheckEvent({
         check: check,
         tags: check.tags,
-        message: "version changed to: " + check.version,
-        details: "version change"
+        message: "new version",
+        details: "version change to: " + check.version 
       });
-
       newEvent.save();
+
+      // // HACK: this makes the uptimeBar green
+      // var newTime = timestamp.setSeconds(timestamp.getSeconds() + 5);
+      // check.setLastTest(status, newTime, error);
+      // var appendUpEvent = new CheckEvent({
+      //   check: check,
+      //   tags: check.tags,
+      //   message: "up"
+      // });
+
+      // appendUpEvent.save();
     }
 
     check.save(function(err2) {
