@@ -2,7 +2,14 @@
 <script id="event_template" type="text/template">
 <li class="{{= highlightFrom && date.valueOf() > highlightFrom ? 'new' : ''}}">
   <span class="label" title="{{= date }}">{{= date.format('LT') }}</span>
-  {{ var label = (event.message == 'paused' || event.message == 'restarted' || (event.message.indexOf("version") !== -1)) ? 'info' : (event.message == 'up') ? 'success' : 'important' }}
+  {{// 
+    //var label = (event.message == 'paused' || event.message == 'restarted') ? 'info' : (event.message == 'up' || (event.message.indexOf("version") !== -1)) ? 'success' : 'important' 
+}}
+
+  {{ var label = (event.message == 'paused' || event.message == 'restarted') ? 'info' : 
+    (event.message == 'up') ? 'success' : 
+    (event.message.indexOf("version") !== -1) ? 'warning' : 'important' }}
+
   <span class="label label-{{= label }}">{{= event.message }}</span>
   <a href="{{=  route + '/checks/' + event.check._id }}">{{= event.check.name }}</a>
   <a href="{{= event.check.url }}" target="_blank"><img src="{{= route }}/images/external-link-ltr-icon.png"></a>
@@ -21,8 +28,11 @@
       is now up
       {{ } }}
     {{ break; }}
+    {{ case /version/.test(event.message): }}
+       ({{= event.details }})
+    {{ break; }}
     {{ default: }}
-      {{ event.description || 'unkown event'}}
+    {{= event.details || 'unkown event'}}
   {{ } }}
 </li>
 </script>
