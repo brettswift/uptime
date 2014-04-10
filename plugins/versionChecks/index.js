@@ -84,6 +84,8 @@ exports.initMonitor = function(options) {
       check.save();
     });
     //TODO: get this into /dashboard/checks column
+    // possibly just in the .ejs file looping over poller Params 
+    // and driven by configuration
     return;
   });
 };
