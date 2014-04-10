@@ -12,9 +12,13 @@
   <thead>
     <tr>
       <th style="width:30%">Name</th>
-      <th style="width:20%">Status</th>
-      <th style="width:35%" title="Outage periods in the last 24h">Uptime</th>
-      <th style="width:15%" title="Average response time in the last 24h">Response Time</th>
+     <!--  TODO: make this dynamic <% paramsToDisplay.forEach(function(param){ %>
+      <th style="width:10%"> <%= param %> </th>
+      <% }); %> -->
+      <th style="width:5%">Version</th>
+      <th style="width:15%">Status</th>
+      <th style="width:auto" title="Outage periods in the last 24h">Uptime</th>
+      <th style="width:13%" title="Average response time in the last 24h">Response Time</th>
     </tr>
   </thead>
   <tbody></tbody>
@@ -25,6 +29,7 @@
     <a href="{{=  route + '/checks/' + check._id }}">{{= check.name }}</a>
     <a href="{{= check.url }}" target="_blank"><img src="{{= route }}/images/external-link-ltr-icon.png"></a>
   </td>
+  <td data-sort="1">{{= check.pollerParams['curVersion'] }}</td>
   {{ if (check.lastTested) { }}
     {{ if (check.isPaused) { }}
   <td data-sort="{{= check.isUp ? check.uptime : -check.downtime }}"><span class="label label-info">paused</span> <span class="blue"> for <span title="{{= new Date(check.lastChanged) }}">{{= moment(check.lastChanged).fromNow(true) }}</span></span></td>

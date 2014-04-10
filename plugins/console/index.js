@@ -45,8 +45,12 @@ var registerNewEventsLogger = function() {
           }
           messageColor = 'green+bold';
           break;
+        case 'version':
+          // message += 'changed to: ' + checkEvent.details;
+          messageColor = 'blue+bold';
+          break;
         default:
-         message += '(unknown event)';
+         message += 'checkEvent.message = ' + checkEvent.message;
          messageColor = 'bold';
       }
 

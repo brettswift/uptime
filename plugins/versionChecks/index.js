@@ -70,11 +70,12 @@ exports.initMonitor = function(options) {
       }
 
       if(newVersion !== oldVersion){
+        console.log("sending new event!");
          var event = new CheckEvent({
             timestamp: new Date(),
             check: check,
             tags: check.tags,
-            message: 'new version',
+            message: 'version',
             details: newVersion
           });
           event.save();
@@ -97,9 +98,9 @@ var registerNewEventsLogger = function() {
       var messageColor;
       var message = check.name + ' ';
       switch (checkEvent.message) {
-        case 'new version':
+        case 'version':
           message += 'new version found: ' + checkEvent.details;
-          messageColor = 'orange+bold';
+          messageColor = 'magenta+italic+bold';
           break;
         default:
           // let the console plugin take care of it?

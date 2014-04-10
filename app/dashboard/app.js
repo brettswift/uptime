@@ -6,6 +6,7 @@ var async = require('async');
 var partials = require('express-partials');
 var flash = require('connect-flash');
 var moment = require('moment');
+var config     = require('config');
 
 var Check = require('../../models/check');
 var Tag = require('../../models/tag');
@@ -63,7 +64,7 @@ app.get('/events', function(req, res) {
 app.get('/checks', function(req, res, next) {
   Check.find().sort({ isUp: 1, lastChanged: -1 }).exec(function(err, checks) {
     if (err) return next(err);
-    res.render('checks', { info: req.flash('info'), checks: checks });
+    res.render('checks', { info: req.flash('info'), checks: checks, paramsToDisplay: config.pollerParamsToDisplay});
   });
 });
 
