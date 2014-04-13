@@ -29,6 +29,7 @@ plugins:
   - ./plugins/httpOptions
   # - ./plugins/email
   # - ./plugins/basicAuth
+  - ./plugins/versionChecks
 
 pollerParamsToDisplay: 
   - curVersion
