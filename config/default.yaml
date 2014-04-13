@@ -7,7 +7,7 @@ mongodb:
 
 monitor:
   name:                   origin
-  apiUrl:                 'http://localhost:8083/api' # must be accessible without a proxy
+  apiUrl:                 'http://localhost:8082/api' # must be accessible without a proxy
   pollingInterval:        10000      # ten seconds
   timeout:                5000       # five seconds
   userAgent:              NodeUptime/3.0 (https://github.com/fzaninotto/uptime)
@@ -20,7 +20,7 @@ analyzer:
 autoStartMonitor: true
 
 server:
-  port:     8083
+  port:     8082
 
 plugins:
   - ./plugins/versionChecks
@@ -49,7 +49,7 @@ email:
   message:           
     from:            # The message sender, e.g. 'Fred Foo <foo@blurdybloop.com>'
     to:              # The message recipient, e.g. 'bar@blurdybloop.com, baz@blurdybloop.com'
-  dashboardUrl: 'http://localhost:8083'
+  dashboardUrl: 'http://localhost:8082'
 
 basicAuth:
   username:    admin
