@@ -29,6 +29,7 @@ plugins:
   # - ./plugins/email
   # - ./plugins/basicAuth
   - ./plugins/versionChecks
+
 email:
   method:      SMTP  # possible methods are SMTP, SES, or Sendmail
   transport:         # see https://github.com/andris9/nodemailer for transport options
